@@ -2,23 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --cork: #D4A574;
-  --pin-red: #E63946;
-  --found-green: #2D6A4F;
-  --thumbtack-blue: #457B9D;
-  --paper-white: #FAFAF5;
-  --ink-dark: #1D1D1D;
-}
-
-body {
-  background-color: #F5F0E8;
-  background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0);
-  background-size: 24px 24px;
-}
-
-::selection {
-  background-color: rgba(69, 123, 157, 0.3);
+@layer base {
+  body {
+    @apply bg-[#000000] text-white;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -29,36 +16,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--cork);
+  background: #3f3f46;
   border-radius: 3px;
 }
 
 *:focus-visible {
-  outline: 2px solid var(--thumbtack-blue);
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
-
-.torn-bar {
-  clip-path: polygon(
-    0% 0%, 95% 0%, 98% 15%, 93% 30%, 100% 45%, 96% 55%,
-    99% 70%, 94% 80%, 97% 100%, 0% 100%
-  );
-}
-
-.pin-dot {
-  position: relative;
-}
-.pin-dot::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 10;
-}
-.pin-dot-lost::before { background-color: var(--pin-red); }
-.pin-dot-found::before { background-color: var(--found-green); }
