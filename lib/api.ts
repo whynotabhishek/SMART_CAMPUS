@@ -37,6 +37,8 @@ export const api = {
       const newReport: Report = {
         id: `mock-${Date.now()}`,
         ...data,
+        image_url: null,
+        contact_phone: data.contact_phone || null,
         status: 'open',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()

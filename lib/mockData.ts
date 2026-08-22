@@ -14,6 +14,8 @@ export const MOCK_REPORTS: Report[] = [
     reported_at: hoursAgo(2),
     contact_name: 'Rahul Sharma',
     contact_email: 'rahul.s@iitd.ac.in',
+    contact_phone: null,
+    image_url: null,
     status: 'open',
     created_at: hoursAgo(2),
     updated_at: hoursAgo(2)
@@ -28,6 +30,8 @@ export const MOCK_REPORTS: Report[] = [
     reported_at: hoursAgo(1),
     contact_name: 'Library Admin',
     contact_email: 'library@iitd.ac.in',
+    contact_phone: null,
+    image_url: null,
     status: 'open',
     created_at: hoursAgo(1),
     updated_at: hoursAgo(1)
@@ -42,6 +46,8 @@ export const MOCK_REPORTS: Report[] = [
     reported_at: hoursAgo(26),
     contact_name: 'Sneha Patel',
     contact_email: 'sneha.p@iitd.ac.in',
+    contact_phone: null,
+    image_url: null,
     status: 'open',
     created_at: hoursAgo(26),
     updated_at: hoursAgo(26)
@@ -56,6 +62,8 @@ export const MOCK_REPORTS: Report[] = [
     reported_at: hoursAgo(22),
     contact_name: 'Canteen Staff',
     contact_email: 'canteen@iitd.ac.in',
+    contact_phone: null,
+    image_url: null,
     status: 'open',
     created_at: hoursAgo(22),
     updated_at: hoursAgo(22)
@@ -70,6 +78,8 @@ export const MOCK_REPORTS: Report[] = [
     reported_at: hoursAgo(5),
     contact_name: 'Priya Mehta',
     contact_email: 'priya.m@iitd.ac.in',
+    contact_phone: null,
+    image_url: null,
     status: 'open',
     created_at: hoursAgo(5),
     updated_at: hoursAgo(5)
