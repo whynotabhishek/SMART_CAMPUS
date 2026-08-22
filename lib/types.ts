@@ -60,4 +60,5 @@ export interface ReportFormData {
   contact_email: string;
   contact_phone: string;
   hidden_details: string;
+  image_base64?: string;
 }

@@ -6,8 +6,9 @@ import json
 
 from models import ReportCreate, ReportResponse
 from database import get_supabase
-from services.embeddings import get_text_embedding
+from services.embeddings import get_text_embedding, get_image_embedding
 from services.matching import find_matches
+import base64
 
 router = APIRouter(prefix="/api/reports", tags=["reports"])
 
@@ -18,6 +19,15 @@ async def create_report(report: ReportCreate):
     text_to_embed = f"{report.title}. {report.description}"
     embedding = await get_text_embedding(text_to_embed)
     
+    image_embedding = None
+    if report.image_base64:
+        try:
+            # Decode base64 to bytes
+            image_data = base64.b64decode(report.image_base64.split(",")[1] if "," in report.image_base64 else report.image_base64)
+            image_embedding = await get_image_embedding(image_data)
+        except Exception as e:
+            print("Image embedding error:", e)
+
     now = datetime.now(timezone.utc).isoformat()
     reported_at = report.reported_at.isoformat() if report.reported_at else now
 
@@ -42,6 +52,8 @@ async def create_report(report: ReportCreate):
     
     if embedding:
         report_dict["text_embedding"] = f"[{','.join(map(str, embedding))}]"
+    if image_embedding:
+        report_dict["image_embedding"] = f"[{','.join(map(str, image_embedding))}]"
 
     try:
         res = supabase.table('reports').insert(report_dict).execute()

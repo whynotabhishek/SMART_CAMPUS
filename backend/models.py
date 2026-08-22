@@ -13,6 +13,7 @@ class ReportCreate(BaseModel):
     contact_email: str
     contact_phone: Optional[str] = None
     hidden_details: Optional[str] = None
+    image_base64: Optional[str] = None
 
 class ReportResponse(BaseModel):
     id: str

@@ -48,14 +48,41 @@ export default function ReportForm({ type }: { type: 'lost' | 'found' }) {
     }
   };
 
-  const borderClass = type === 'lost' ? 'border-t-4 border-red-500' : 'border-t-4 border-found-green';
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, image_base64: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const borderClass = type === 'lost' ? 'border-t-4 border-red-500' : 'border-t-4 border-emerald-500';
 
   return (
     <form onSubmit={handleSubmit} className={`bg-[#151515] p-6 rounded-lg shadow-sm ${borderClass} space-y-6`}>
       {error && <div className="p-3 bg-red-500/10 border border-red-500 text-red-400 rounded-lg text-sm">{error}</div>}
       
       <div className="space-y-4">
-        <h3 className="font-medium text-lg border-b border-zinc-800 pb-2">Item Details</h3>
+        <h3 className="font-medium text-lg text-white border-b border-zinc-800 pb-2">Item Details</h3>
+        
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium text-zinc-300">Upload Photo (Highly Recommended)</label>
+          <input 
+            type="file" 
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="block w-full text-sm text-zinc-400
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-lg file:border-0
+              file:text-sm file:font-semibold
+              file:bg-zinc-800 file:text-white
+              hover:file:bg-zinc-700 cursor-pointer"
+          />
+          {formData.image_base64 && <p className="text-xs text-emerald-400 mt-1">✓ Image attached for AI analysis</p>}
+        </div>
         <Input 
           id="title" name="title" label="Title" 
           value={formData.title} onChange={handleChange} 
