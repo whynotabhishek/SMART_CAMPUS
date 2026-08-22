@@ -1,87 +1,137 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { api } from '@/lib/api';
-import Button from '@/components/ui/Button';
-import ReportCard from '@/components/ReportCard';
-import LoadingState from '@/components/ui/LoadingState';
-import type { Report } from '@/lib/types';
+import { Download, Plus, Archive, Handshake, CheckCircle2, MoreHorizontal, MapPin, Clock } from 'lucide-react';
 
-export default function Home() {
-  const [stats, setStats] = useState({ open_reports: 0, total_matches: 0 });
-  const [reports, setReports] = useState<Report[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [statsData, reportsData] = await Promise.all([
-          api.getStats().catch(() => ({ open_reports: 0, total_matches: 0 })),
-          api.getReports({ limit: '6' }).catch(() => [])
-        ]);
-        setStats(statsData);
-        setReports(reportsData);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
+export default function DashboardOverview() {
   return (
-    <div className="space-y-12 py-8">
-      {/* Hero Section */}
-      <section className="text-center space-y-6 max-w-3xl mx-auto">
-        <h1 className="font-display text-5xl tracking-wide flex items-center justify-center gap-3">
-          <span>📌</span> CampusFind
-        </h1>
-        <p className="text-xl text-ink-dark/80">
-          AI-powered Lost & Found for IIT Delhi
-        </p>
-        
-        <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-          <Link href="/report/lost">
-            <Button variant="danger" size="lg" className="w-full sm:w-auto">I Lost Something</Button>
-          </Link>
-          <Link href="/report/found">
-            <Button variant="success" size="lg" className="w-full sm:w-auto">I Found Something</Button>
+    <div className="p-10 max-w-[1200px] mx-auto">
+      {/* Header */}
+      <div className="flex justify-between items-end mb-12">
+        <div>
+          <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Overview</h1>
+          <p className="text-zinc-400">Track your reported items and potential matches across campus.</p>
+        </div>
+        <div className="flex gap-4">
+          <button className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-zinc-700 text-sm font-medium hover:bg-zinc-800 transition-colors">
+            <Download size={16} /> EXPORT DATA
+          </button>
+          <Link href="/report/lost" className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white text-black text-sm font-medium hover:bg-zinc-200 transition-colors">
+            <Plus size={18} /> New Report
           </Link>
         </div>
-      </section>
+      </div>
 
-      {/* Stats Section */}
-      <section className="grid grid-cols-2 gap-4 max-w-2xl mx-auto text-center">
-        <div className="bg-paper-white p-6 rounded-sm border border-cork/20">
-          <div className="font-mono text-4xl text-thumbtack-blue font-bold mb-1">{stats.open_reports}</div>
-          <div className="text-sm text-ink-dark/70 uppercase tracking-wider">Open Reports</div>
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {/* Active Reports */}
+        <div className="bg-[#151515] rounded-2xl p-6 relative overflow-hidden border border-zinc-800/60">
+          <Archive size={120} className="absolute -right-6 -bottom-6 text-zinc-800/30" strokeWidth={1.5} />
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-4 tracking-wide text-xs font-semibold text-zinc-400 uppercase">
+              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+              ACTIVE REPORTS
+            </div>
+            <div className="text-6xl font-bold text-white mb-4">04</div>
+            <div className="text-sm text-zinc-400">
+              <span className="text-emerald-400 font-medium">↗ +1</span> since last week
+            </div>
+          </div>
         </div>
-        <div className="bg-paper-white p-6 rounded-sm border border-cork/20">
-          <div className="font-mono text-4xl text-found-green font-bold mb-1">{stats.total_matches}</div>
-          <div className="text-sm text-ink-dark/70 uppercase tracking-wider">Successful Matches</div>
-        </div>
-      </section>
 
-      {/* Recent Reports */}
-      <section className="space-y-6">
-        <div className="flex justify-between items-end border-b border-cork/30 pb-2">
-          <h2 className="font-display text-2xl text-ink-dark">Recent Reports</h2>
-          <Link href="/browse" className="text-sm text-thumbtack-blue hover:underline">View all →</Link>
+        {/* Potential Matches */}
+        <div className="bg-[#151515] rounded-2xl p-6 relative overflow-hidden border border-zinc-800/60">
+          <Handshake size={140} className="absolute -right-8 -bottom-8 text-zinc-800/30 -rotate-12" strokeWidth={1.5} />
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-4 tracking-wide text-xs font-semibold text-zinc-400 uppercase">
+              <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+              POTENTIAL MATCHES
+            </div>
+            <div className="text-6xl font-bold text-white mb-4">12</div>
+            <div className="text-sm text-zinc-400">Requires your review</div>
+          </div>
         </div>
-        
-        {loading ? (
-          <LoadingState count={6} />
-        ) : reports.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reports.map(report => (
-              <ReportCard key={report.id} report={report} />
-            ))}
+
+        {/* Items Recovered */}
+        <div className="bg-[#151515] rounded-2xl p-6 relative overflow-hidden border border-zinc-800/60">
+          <CheckCircle2 size={120} className="absolute -right-6 -bottom-6 text-zinc-800/30" strokeWidth={1.5} />
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-4 tracking-wide text-xs font-semibold text-zinc-400 uppercase">
+              <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+              ITEMS RECOVERED
+            </div>
+            <div className="text-6xl font-bold text-white mb-4">02</div>
+            <div className="text-sm text-zinc-400">This semester</div>
           </div>
-        ) : (
-          <div className="text-center py-12 text-ink-dark/60 bg-paper-white/50 border border-cork/20 rounded-sm">
-            No recent reports to show.
+        </div>
+      </div>
+
+      {/* Priority Matches */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold text-white">Priority Matches</h2>
+        <Link href="/matches" className="text-sm font-semibold tracking-wide text-zinc-400 hover:text-white transition-colors uppercase">
+          VIEW ALL →
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Match Card 1 */}
+        <div className="bg-[#151515] rounded-2xl p-5 border border-zinc-800/60 flex flex-col">
+          <div className="flex gap-5 mb-5">
+            <div className="w-32 h-32 rounded-xl bg-zinc-800 flex-shrink-0 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300&q=80" alt="HydroFlask" className="w-full h-full object-cover opacity-80" />
+            </div>
+            <div className="flex-1">
+              <div className="flex justify-between items-start mb-2">
+                <div className="bg-black text-xs font-bold px-2 py-1 rounded-md text-zinc-300 border border-zinc-800">
+                  98% MATCH
+                </div>
+                <button className="text-zinc-500 hover:text-white"><MoreHorizontal size={20} /></button>
+              </div>
+              <h3 className="font-bold text-white text-lg mb-1.5 leading-tight">Matte Black HydroFlask</h3>
+              <p className="text-sm text-zinc-400 line-clamp-3 leading-relaxed">
+                Found near the Main Library, 2nd floor study area. Has a small dent on the bottom rim. Black cap with a standard loop handle.
+              </p>
+            </div>
           </div>
-        )}
-      </section>
+          <div className="flex justify-between items-center mt-auto pt-4 border-t border-zinc-800/50">
+            <div className="flex items-center gap-1.5 text-sm text-zinc-400">
+              <MapPin size={16} /> Main Library
+            </div>
+            <Link href="/matches/mock-1" className="px-5 py-2 text-sm font-medium rounded-lg border border-zinc-700 hover:bg-zinc-800 transition-colors">
+              Review
+            </Link>
+          </div>
+        </div>
+
+        {/* Match Card 2 */}
+        <div className="bg-[#151515] rounded-2xl p-5 border border-zinc-800/60 flex flex-col">
+          <div className="flex gap-5 mb-5">
+            <div className="w-32 h-32 rounded-xl bg-zinc-800 flex-shrink-0 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=300&q=80" alt="Headphones" className="w-full h-full object-cover opacity-80" />
+            </div>
+            <div className="flex-1">
+              <div className="flex justify-between items-start mb-2">
+                <div className="bg-black text-xs font-bold px-2 py-1 rounded-md text-zinc-300 border border-zinc-800">
+                  85% MATCH
+                </div>
+                <button className="text-zinc-500 hover:text-white"><MoreHorizontal size={20} /></button>
+              </div>
+              <h3 className="font-bold text-white text-lg mb-1.5 leading-tight">Sony WH-1000XM4</h3>
+              <p className="text-sm text-zinc-400 line-clamp-3 leading-relaxed">
+                Left in Student Union cafeteria booth. Black color, in original carrying case. Seems to have a custom sticker removed.
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-between items-center mt-auto pt-4 border-t border-zinc-800/50">
+            <div className="flex items-center gap-1.5 text-sm text-zinc-400">
+              <Clock size={16} /> 2 hours ago
+            </div>
+            <Link href="/matches/mock-2" className="px-5 py-2 text-sm font-medium rounded-lg border border-zinc-700 hover:bg-zinc-800 transition-colors">
+              Review
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
