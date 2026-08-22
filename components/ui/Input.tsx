@@ -8,12 +8,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTe
 }
 
 export default function Input({ label, error, helperText, multiline, id, className = '', ...props }: InputProps) {
-  const inputClasses = `w-full bg-paper-white border rounded-sm px-3 py-2 text-ink-dark placeholder-ink-dark/40 focus:outline-none focus:ring-2 focus:ring-thumbtack-blue transition-shadow ${error ? 'border-pin-red' : 'border-cork'}`;
+  const inputClasses = `w-full bg-[#151515] border rounded-lg px-3 py-2 text-white placeholder-ink-dark/40 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow ${error ? 'border-red-500' : 'border-zinc-700'}`;
   
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
-      <label htmlFor={id} className="text-sm font-medium text-ink-dark">
-        {label} {props.required && <span className="text-pin-red">*</span>}
+      <label htmlFor={id} className="text-sm font-medium text-white">
+        {label} {props.required && <span className="text-red-400">*</span>}
       </label>
       {multiline ? (
         <textarea
@@ -28,8 +28,8 @@ export default function Input({ label, error, helperText, multiline, id, classNa
           {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
         />
       )}
-      {error && <span className="text-xs text-pin-red">{error}</span>}
-      {helperText && !error && <span className="text-xs text-ink-dark/60">{helperText}</span>}
+      {error && <span className="text-xs text-red-400">{error}</span>}
+      {helperText && !error && <span className="text-xs text-white/60">{helperText}</span>}
     </div>
   );
 }

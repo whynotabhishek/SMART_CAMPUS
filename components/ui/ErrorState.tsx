@@ -8,9 +8,9 @@ interface ErrorStateProps {
 
 export default function ErrorState({ message, onRetry }: ErrorStateProps) {
   return (
-    <div className="flex flex-col items-start p-6 bg-paper-white border-l-4 border-pin-red rounded-sm shadow-sm">
-      <h3 className="text-lg font-medium text-ink-dark mb-2">Something went wrong</h3>
-      <p className="text-ink-dark/70 mb-4">{message}</p>
+    <div className="flex flex-col items-start p-6 bg-[#151515] border-l-4 border-red-500 rounded-lg shadow-sm">
+      <h3 className="text-lg font-medium text-white mb-2">Something went wrong</h3>
+      <p className="text-white/70 mb-4">{message}</p>
       <Button variant="outline" size="sm" onClick={onRetry}>Retry</Button>
     </div>
   );

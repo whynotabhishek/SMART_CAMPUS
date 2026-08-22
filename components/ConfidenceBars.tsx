@@ -44,7 +44,7 @@ export default function ConfidenceBars({ scores, animated = true }: ConfidenceBa
             
             <div className="flex-grow flex items-center gap-3">
               {isVisualZero ? (
-                <span className="text-sm italic text-ink-dark/50 bg-cork/10 px-3 py-1 rounded-sm">No photo</span>
+                <span className="text-sm italic text-white/50 bg-zinc-800 px-3 py-1 rounded-lg">No photo</span>
               ) : (
                 <div 
                   className="relative h-6 bg-opacity-10 w-full max-w-[200px]" 

@@ -48,14 +48,14 @@ export default function ReportForm({ type }: { type: 'lost' | 'found' }) {
     }
   };
 
-  const borderClass = type === 'lost' ? 'border-t-4 border-pin-red' : 'border-t-4 border-found-green';
+  const borderClass = type === 'lost' ? 'border-t-4 border-red-500' : 'border-t-4 border-found-green';
 
   return (
-    <form onSubmit={handleSubmit} className={`bg-paper-white p-6 rounded-sm shadow-sm ${borderClass} space-y-6`}>
-      {error && <div className="p-3 bg-pin-red/10 border border-pin-red text-pin-red rounded-sm text-sm">{error}</div>}
+    <form onSubmit={handleSubmit} className={`bg-[#151515] p-6 rounded-lg shadow-sm ${borderClass} space-y-6`}>
+      {error && <div className="p-3 bg-red-500/10 border border-red-500 text-red-400 rounded-lg text-sm">{error}</div>}
       
       <div className="space-y-4">
-        <h3 className="font-medium text-lg border-b border-cork/20 pb-2">Item Details</h3>
+        <h3 className="font-medium text-lg border-b border-zinc-800 pb-2">Item Details</h3>
         <Input 
           id="title" name="title" label="Title" 
           value={formData.title} onChange={handleChange} 
@@ -90,7 +90,7 @@ export default function ReportForm({ type }: { type: 'lost' | 'found' }) {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-lg border-b border-cork/20 pb-2">Contact Information</h3>
+        <h3 className="font-medium text-lg border-b border-zinc-800 pb-2">Contact Information</h3>
         <Input 
           id="contact_name" name="contact_name" label="Your Name" 
           value={formData.contact_name} onChange={handleChange} required 

@@ -48,16 +48,16 @@ export default function MatchesPage() {
   return (
     <div className="max-w-3xl mx-auto py-8">
       {/* Original Report Summary */}
-      <div className="bg-cork/10 border-l-4 border-cork p-4 rounded-sm mb-8">
-        <h2 className="text-sm font-medium text-ink-dark/60 uppercase tracking-wider mb-2">Your Report</h2>
+      <div className="bg-zinc-800 border-l-4 border-zinc-700 p-4 rounded-lg mb-8">
+        <h2 className="text-sm font-medium text-white/60 uppercase tracking-wider mb-2">Your Report</h2>
         <div className="flex items-start justify-between">
           <div>
             <h3 className="font-medium text-lg">{report.title}</h3>
-            <p className="text-sm text-ink-dark/80 line-clamp-1">{report.description}</p>
+            <p className="text-sm text-white/80 line-clamp-1">{report.description}</p>
           </div>
           <Badge variant={report.type}>{report.type}</Badge>
         </div>
-        <div className="flex gap-4 mt-2 text-xs text-ink-dark/60">
+        <div className="flex gap-4 mt-2 text-xs text-white/60">
           <span className="flex items-center gap-1"><MapPin size={12} /> {report.location_zone}</span>
           <span>{formatRelativeTime(report.created_at)}</span>
         </div>

@@ -61,20 +61,20 @@ function BrowseContent() {
       <h1 className="font-display text-4xl">Browse Reports</h1>
       
       {/* Filters */}
-      <div className="bg-paper-white p-4 rounded-sm border border-cork/20 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+      <div className="bg-[#151515] p-4 rounded-lg border border-zinc-800 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
         <div>
-          <label className="block text-sm font-medium text-ink-dark mb-1">Type</label>
-          <div className="flex bg-cork/10 p-1 rounded-sm">
+          <label className="block text-sm font-medium text-white mb-1">Type</label>
+          <div className="flex bg-zinc-800 p-1 rounded-lg">
             <button 
-              className={`flex-1 py-1 text-sm rounded-sm transition ${!typeParam ? 'bg-paper-white shadow-sm' : ''}`}
+              className={`flex-1 py-1 text-sm rounded-lg transition ${!typeParam ? 'bg-[#151515] shadow-sm' : ''}`}
               onClick={() => updateFilter('type', '')}
             >All</button>
             <button 
-              className={`flex-1 py-1 text-sm rounded-sm transition ${typeParam === 'lost' ? 'bg-pin-red text-white' : ''}`}
+              className={`flex-1 py-1 text-sm rounded-lg transition ${typeParam === 'lost' ? 'bg-red-500 text-white' : ''}`}
               onClick={() => updateFilter('type', 'lost')}
             >Lost</button>
             <button 
-              className={`flex-1 py-1 text-sm rounded-sm transition ${typeParam === 'found' ? 'bg-found-green text-white' : ''}`}
+              className={`flex-1 py-1 text-sm rounded-lg transition ${typeParam === 'found' ? 'bg-emerald-500 text-white' : ''}`}
               onClick={() => updateFilter('type', 'found')}
             >Found</button>
           </div>
@@ -100,11 +100,11 @@ function BrowseContent() {
             onKeyDown={(e) => e.key === 'Enter' && updateFilter('search', (e.target as HTMLInputElement).value)}
             placeholder="Search titles..." 
           />
-          <Search size={16} className="absolute right-3 top-9 text-ink-dark/40" />
+          <Search size={16} className="absolute right-3 top-9 text-white/40" />
         </div>
       </div>
       
-      <div className="text-sm text-ink-dark/70 font-medium">
+      <div className="text-sm text-white/70 font-medium">
         Showing {reports.length} reports
       </div>
 

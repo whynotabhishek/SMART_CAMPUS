@@ -12,7 +12,7 @@ export default function Card({ children, type, pinned = false, className = '' }:
   const hoverClass = pinned ? 'transition-transform duration-200 hover:-rotate-1 hover:shadow-md' : '';
   
   return (
-    <div className={`bg-paper-white shadow-sm border border-cork/20 rounded-[2px] p-4 ${pinClass} ${hoverClass} ${className}`}>
+    <div className={`bg-[#151515] shadow-sm border border-zinc-800 rounded-xl p-4 ${pinClass} ${hoverClass} ${className}`}>
       {children}
     </div>
   );
