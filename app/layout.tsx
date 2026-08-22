@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import RegisterSW from "@/components/RegisterSW";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-body' });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Sidebar />
           <main className="flex-1 min-w-0 overflow-y-auto">
             {children}
+            <RegisterSW />
           </main>
         </div>
       </body>
