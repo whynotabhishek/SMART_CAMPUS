@@ -43,8 +43,22 @@ export default function Sidebar() {
       {/* Navigation Links */}
       <nav className="flex-1 px-4 space-y-1">
         <NavItem href="/" icon={LayoutGrid} label="Dashboard" active={pathname === '/'} />
-        <NavItem href="/my-reports" icon={ClipboardList} label="My Reports" active={pathname.includes('/my-reports') || pathname.includes('/report/')} />
-        <NavItem href="/browse" icon={PackageSearch} label="Found Items" active={pathname.includes('/browse') || pathname.includes('/matches/')} />
+        <NavItem href="/my-reports" icon={ClipboardList} label="My Reports" active={pathname.includes('/my-reports')} />
+        <NavItem href="/browse" icon={PackageSearch} label="Browse All" active={pathname.includes('/browse') || pathname.includes('/matches')} />
+        
+        <div className="pt-6 pb-2">
+          <span className="px-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">Actions</span>
+        </div>
+        
+        <Link href="/report/lost" className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition-colors mb-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+          Report Lost Item
+        </Link>
+
+        <Link href="/report/found" className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+          Report Found Item
+        </Link>
       </nav>
 
       {/* Bottom Links */}
